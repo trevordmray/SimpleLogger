@@ -1,0 +1,35 @@
+﻿<Window x:Class="SimpleLogger.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings" Height="400" Width="400"
+        WindowStartupLocation="CenterOwner">
+    <StackPanel Margin="10">
+        <GroupBox Header="Lookup Source" Padding="5">
+            <ComboBox x:Name="SourceComboBox" SelectionChanged="SourceComboBox_SelectionChanged">
+                <ComboBoxItem>Callook.info</ComboBoxItem>
+                <ComboBoxItem>QRZ.com</ComboBoxItem>
+            </ComboBox>
+        </GroupBox>
+
+        <GroupBox x:Name="QrzCredentialsGroup" Header="QRZ.com Credentials" Padding="5" Margin="0,10,0,0">
+            <StackPanel>
+                <TextBlock Text="Username:" Margin="0,0,0,2"/>
+                <TextBox x:Name="UsernameTextBox"/>
+                <TextBlock Text="Password:" Margin="0,5,0,2"/>
+                <PasswordBox x:Name="PasswordBox"/>
+                <Button x:Name="TestConnectionButton" Content="Test Connection" Margin="0,10,0,0" Click="TestConnectionButton_Click"/>
+                <TextBlock x:Name="StatusTextBlock" Margin="0,5,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Danger Zone" Padding="5" Margin="0,10,0,0">
+            <Button x:Name="ClearDataButton" Content="Clear All Program Data" Background="#FFE0E0" BorderBrush="#FFC0C0" Foreground="Red" FontWeight="Bold" Click="ClearDataButton_Click"/>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="Save" Width="75" IsDefault="True" Click="SaveButton_Click"/>
+            <Button Content="Cancel" Width="75" Margin="5,0,0,0" IsCancel="True" Click="CancelButton_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
+

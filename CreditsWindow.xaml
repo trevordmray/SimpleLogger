@@ -1,0 +1,51 @@
+﻿<Window x:Class="SimpleLogger.CreditsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Credits" Height="400" Width="500"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="APIs Used:" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock TextWrapping="Wrap" Margin="10,0,0,10">
+                This application uses the 
+                <Hyperlink NavigateUri="https://callook.info" RequestNavigate="Hyperlink_RequestNavigate">Callook.info API</Hyperlink>
+                and the 
+                <Hyperlink NavigateUri="https://www.qrz.com/XML/current_spec.html" RequestNavigate="Hyperlink_RequestNavigate">QRZ.com XML Data API</Hyperlink>
+                for amateur radio callsign lookups.
+            </TextBlock>
+
+            <TextBlock Text="Development:" FontWeight="Bold" Margin="0,10,0,5"/>
+            <TextBlock TextWrapping="Wrap" Margin="10,0,0,10">
+                Developed by K7TDR in partnership with 
+                <Hyperlink NavigateUri="https://gemini.google.com/about/" RequestNavigate="Hyperlink_RequestNavigate">Gemini</Hyperlink>.
+            </TextBlock>
+
+            <TextBlock Text="Open Source:" FontWeight="Bold" Margin="0,10,0,5"/>
+            <TextBlock TextWrapping="Wrap" Margin="10,0,0,10">
+                This program is free to use, improve, or modify in any way you see fit. You can view the project on 
+                <Hyperlink NavigateUri="https://github.com/trevordmray/simplelogger/blob/main/README.md" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>.
+            </TextBlock>
+
+            <TextBlock Text="Standards &amp; Libraries:" FontWeight="Bold" Margin="0,10,0,5"/>
+            <TextBlock TextWrapping="Wrap" Margin="10,0,0,10">
+                This application uses the 
+                <Hyperlink NavigateUri="https://adif.org/" RequestNavigate="Hyperlink_RequestNavigate">Amateur Data Interchange Format (ADIF)</Hyperlink>
+                for log exporting and the 
+                <Hyperlink NavigateUri="https://www.newtonsoft.com/json" RequestNavigate="Hyperlink_RequestNavigate">Newtonsoft.Json</Hyperlink>
+                 library.
+            </TextBlock>
+
+            <TextBlock Text="Version: SLDT202509" FontStyle="Italic" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+
+        </StackPanel>
+
+        <Button Grid.Row="1" Content="Close" Width="75" HorizontalAlignment="Right" IsCancel="True" Click="CloseButton_Click"/>
+    </Grid>
+</Window>
+

@@ -1,0 +1,145 @@
+﻿<Window x:Class="SimpleLogger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SimpleLogger" Height="650" Width="1000" Icon="SimpleLogger.ico">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="420"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Panel for Inputs -->
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <GroupBox Header="Log Callsign" Padding="10">
+                    <StackPanel>
+                        <TextBox x:Name="CallsignTextBox" KeyDown="CallsignTextBox_KeyDown"/>
+                        <Button x:Name="LookupButton" Content="Lookup" Margin="0,5,0,0" Click="LookupButton_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox x:Name="LookupResultsGroup" Header="Lookup Results" Padding="10" Margin="0,10,0,0" VerticalAlignment="Top" Visibility="Collapsed">
+                    <TextBlock x:Name="LookupResultsTextBlock" TextWrapping="Wrap"/>
+                </GroupBox>
+
+                <GroupBox Header="Log New QSO" Padding="10" Margin="0,10,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- My Information -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="My Information" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="My Callsign *" VerticalAlignment="Center" Margin="0,0,5,0" />
+                            <TextBox   Grid.Row="1" Grid.Column="1" x:Name="MyCallsignTextBox" Margin="0,2,10,2"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="My Grid" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="1" Grid.Column="3" x:Name="MyGridTextBox" Margin="0,2"/>
+
+                            <!-- QSO Details -->
+                            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Text="QSO Details" FontWeight="Bold" Margin="0,10,0,5"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Their Name" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" x:Name="TheirNameTextBox" Margin="0,2"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Frequency/Band" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" x:Name="FrequencyBandTextBox" Margin="0,2"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Location" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" x:Name="TheirLocationTextBox" Margin="0,2"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Mode" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <ComboBox  Grid.Row="6" Grid.Column="1" x:Name="ModeComboBox" IsEditable="True" Margin="0,2,10,2">
+                                <ComboBoxItem>SSB</ComboBoxItem>
+                                <ComboBoxItem>CW</ComboBoxItem>
+                                <ComboBoxItem>FM</ComboBoxItem>
+                                <ComboBoxItem>AM</ComboBoxItem>
+                                <ComboBoxItem>FT8</ComboBoxItem>
+                                <ComboBoxItem>FT4</ComboBoxItem>
+                                <ComboBoxItem>JS8</ComboBoxItem>
+                                <ComboBoxItem>RTTY</ComboBoxItem>
+                                <ComboBoxItem>Digital</ComboBoxItem>
+                                <ComboBoxItem>Other</ComboBoxItem>
+                            </ComboBox>
+                            <TextBlock Grid.Row="6" Grid.Column="2" Text="Their Grid" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="6" Grid.Column="3" x:Name="TheirGridTextBox" Margin="0,2"/>
+
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="RST Sent" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="7" Grid.Column="1" x:Name="RstSentTextBox" Margin="0,2,10,2"/>
+                            <TextBlock Grid.Row="7" Grid.Column="2" Text="RST Rcvd" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="7" Grid.Column="3" x:Name="RstRcvdTextBox" Margin="0,2"/>
+
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Notes" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                            <TextBox   Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" x:Name="NotesTextBox" Margin="0,2"/>
+
+                        </Grid>
+                        <Button x:Name="LogQsoButton" Content="Log QSO" Margin="0,10,0,0" Click="LogQsoButton_Click"/>
+                    </StackPanel>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" />
+
+        <!-- Right Panel for Log -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,10">
+                <Label x:Name="QsoCountLabel" Content="QSOs Logged: 0" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Button Content="Import CSV" Margin="0,0,5,0" Click="ImportCsvButton_Click" Padding="5,2"/>
+                <Button Content="Export CSV" Margin="0,0,5,0" Click="ExportCsvButton_Click" Padding="5,2"/>
+                <Button Content="Export ADIF" Margin="0,0,5,0" Click="ExportAdifButton_Click" Padding="5,2"/>
+                <Button Content="Clear Log" Click="ClearLogButton_Click" Padding="5,2"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="1" x:Name="QsoDataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding QsoLog}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="Auto"/>
+                    <DataGridTextColumn Header="Time" Binding="{Binding Time}" Width="Auto"/>
+                    <DataGridTextColumn Header="Callsign" Binding="{Binding Callsign}" Width="*"/>
+                    <DataGridTextColumn Header="Location" Binding="{Binding TheirLocation}" Width="2*"/>
+                    <DataGridTextColumn Header="Grid" Binding="{Binding TheirGrid}" Width="*"/>
+                    <DataGridTemplateColumn Header="Actions" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="View" Click="ViewButton_Click" Margin="2" Padding="5,2"/>
+                                    <Button Content="Edit" Click="EditButton_Click" Margin="2" Padding="5,2"/>
+                                    <Button Content="Delete" Click="DeleteButton_Click" Margin="2" Padding="5,2"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="Settings" Margin="0,0,5,0" Click="SettingsButton_Click" Padding="5,2"/>
+                <Button Content="Credits" Click="CreditsButton_Click" Padding="5,2"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
+
