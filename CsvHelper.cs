@@ -16,10 +16,11 @@ namespace SimpleLogger
             {
                 // Basic CSV parsing, may not handle all edge cases like commas within quoted fields
                 var values = line.Split(',');
-                if (values.Length >= 11)
+                if (values.Length >= 13) // Increased to match the number of exported columns
                 {
                     var qso = new QSO
                     {
+                        // The order here now matches the Export method's header order
                         Date = values[0].Trim('"'),
                         Time = values[1].Trim('"'),
                         Callsign = values[2].Trim('"'),
@@ -32,7 +33,7 @@ namespace SimpleLogger
                         TheirGrid = values[9].Trim('"'),
                         MyCallsign = values[10].Trim('"'),
                         MyGrid = values[11].Trim('"'),
-                        Notes = values.Length > 12 ? values[12].Trim('"') : string.Empty
+                        Notes = values[12].Trim('"')
                     };
                     qsos.Add(qso);
                 }

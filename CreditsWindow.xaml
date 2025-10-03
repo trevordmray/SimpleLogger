@@ -29,7 +29,7 @@
             <TextBlock Text="Open Source:" FontWeight="Bold" Margin="0,10,0,5"/>
             <TextBlock TextWrapping="Wrap" Margin="10,0,0,10">
                 This program is free to use, improve, or modify in any way you see fit. You can view the project on 
-                <Hyperlink NavigateUri="https://github.com/trevordmray/simplelogger/blob/main/README.md" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>.
+                <Hyperlink NavigateUri="https://github.com/trevordmray/SimpleLogger" RequestNavigate="Hyperlink_RequestNavigate">GitHub</Hyperlink>.
             </TextBlock>
 
             <TextBlock Text="Standards &amp; Libraries:" FontWeight="Bold" Margin="0,10,0,5"/>
