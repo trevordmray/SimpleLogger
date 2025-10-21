@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions; // Added for Regex support
 
 namespace SimpleLogger
 {
@@ -10,29 +11,46 @@ namespace SimpleLogger
         public static List<QSO> Import(string filePath)
         {
             var qsos = new List<QSO>();
-            var lines = File.ReadAllLines(filePath).Skip(1); // Skip header
+            // Skip the header row
+            var lines = File.ReadAllLines(filePath).Skip(1);
 
             foreach (var line in lines)
             {
-                // Basic CSV parsing, may not handle all edge cases like commas within quoted fields
-                var values = line.Split(',');
-                if (values.Length >= 11)
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                // FIX 1: Use Regex to split the line, which correctly handles commas inside quoted fields.
+                var values = Regex.Split(line, ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+                // FIX 2: The export function writes 13 columns, so we should check for 13.
+                if (values.Length >= 13)
                 {
+                    // Helper function to un-escape the CSV field. It removes the surrounding quotes
+                    // and replaces escaped double-quotes ("") with a single quote (").
+                    string Unescape(string value)
+                    {
+                        if (value.StartsWith("\"") && value.EndsWith("\""))
+                        {
+                            value = value.Substring(1, value.Length - 2);
+                        }
+                        return value.Replace("\"\"", "\"");
+                    }
+
                     var qso = new QSO
                     {
-                        Date = values[0].Trim('"'),
-                        Time = values[1].Trim('"'),
-                        Callsign = values[2].Trim('"'),
-                        FrequencyBand = values[3].Trim('"'),
-                        Mode = values[4].Trim('"'),
-                        RstSent = values[5].Trim('"'),
-                        RstReceived = values[6].Trim('"'),
-                        TheirName = values[7].Trim('"'),
-                        TheirLocation = values[8].Trim('"'),
-                        TheirGrid = values[9].Trim('"'),
-                        MyCallsign = values[10].Trim('"'),
-                        MyGrid = values[11].Trim('"'),
-                        Notes = values.Length > 12 ? values[12].Trim('"') : string.Empty
+                        // FIX 3: Apply the Unescape helper to each value.
+                        Date = Unescape(values[0]),
+                        Time = Unescape(values[1]),
+                        Callsign = Unescape(values[2]),
+                        FrequencyBand = Unescape(values[3]),
+                        Mode = Unescape(values[4]),
+                        RstSent = Unescape(values[5]),
+                        RstReceived = Unescape(values[6]),
+                        TheirName = Unescape(values[7]),
+                        TheirLocation = Unescape(values[8]),
+                        TheirGrid = Unescape(values[9]),
+                        MyCallsign = Unescape(values[10]),
+                        MyGrid = Unescape(values[11]),
+                        Notes = Unescape(values[12])
                     };
                     qsos.Add(qso);
                 }
@@ -89,4 +107,3 @@ namespace SimpleLogger
         }
     }
 }
-

@@ -41,7 +41,7 @@
                  library.
             </TextBlock>
 
-            <TextBlock Text="Version: SLDT202509" FontStyle="Italic" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+            <TextBlock Text="Version: SLDT202510" FontStyle="Italic" HorizontalAlignment="Left" Margin="0,15,0,0"/>
 
         </StackPanel>
 
